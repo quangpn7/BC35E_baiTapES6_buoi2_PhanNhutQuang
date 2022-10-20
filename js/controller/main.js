@@ -1,3 +1,5 @@
+import { GlassesList } from "../model/GlassesList.js";
+
 let dataGlasses = [
   {
     id: "G1",
@@ -96,45 +98,71 @@ let dataGlasses = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequatur soluta ad aut laborum amet.",
   },
 ];
+//#region
+// let renderProducts = (productArr) => {
+//   let contentHTML = "";
+//   for (const glass of productArr) {
+//     contentHTML += `
+//     <div class="col-4">
+//               <button class="btn" onclick = "renderGlass('${glass.id}')">
+//                 <img src="${glass.src}" alt="" style="width: 100%" />
+//               </button>
+//             </div>
+//     `;
+//   }
+//   document.querySelector("#vglassesList").innerHTML = contentHTML;
+// };
+// window.renderGlass = (glassID) => {
+//   let index = dataGlasses.findIndex((ob) => ob.id === glassID);
+//   let glass = dataGlasses[index];
+//   document.querySelector("#glassesInfo").innerHTML = `
+//             <div class="glasses-name">
+//                           <span>${glass.name}</span>
+//                           <span> - ${glass.brand}</span>
+//                           <span> (${glass.color})</span>
+//                         </div>
+//                         <div class="glass-status">
+//                           <span class="btn btn-danger">$${glass.price}</span>
+//                           <span>Stocking</span><br />
+//                         </div>
+//                         <p>
+//                           ${glass.description}
+//                         </p>
+//             `;
+//   document.querySelector("#avatar").innerHTML = `
+// <img src="${glass.virtualImg}" alt="vitural-img">
+// `;
+//   document.querySelector(".vglasses__info").style.display = "block";
+// };
 
-let renderProducts = (productArr) => {
-  let contentHTML = "";
-  for (const glass of productArr) {
-    contentHTML += `
-    <div class="col-4">
-              <button class="btn" onclick = "renderGlass('${glass.id}')">
-                <img src="${glass.src}" alt="" style="width: 100%" />
-              </button>
-            </div>
-    `;
-  }
-  document.querySelector("#vglassesList").innerHTML = contentHTML;
-};
+// renderProducts(dataGlasses);
+
+//#endregion
+
+window.glassList = new GlassesList();
+glassList.arrGlasses = dataGlasses;
 window.renderGlass = (glassID) => {
   let index = dataGlasses.findIndex((ob) => ob.id === glassID);
   let glass = dataGlasses[index];
   document.querySelector("#glassesInfo").innerHTML = `
-            <div class="glasses-name">
-                          <span>${glass.name}</span>
-                          <span> - ${glass.brand}</span>
-                          <span> (${glass.color})</span>
-                        </div>
-                        <div class="glass-status">
-                          <span class="btn btn-danger">$${glass.price}</span>
-                          <span>Stocking</span><br />
-                        </div>
-                        <p>
-                          ${glass.description}
-                        </p>
-            `;
+              <div class="glasses-name">
+                            <span>${glass.name}</span>
+                            <span> - ${glass.brand}</span>
+                            <span> (${glass.color})</span>
+                          </div>
+                          <div class="glass-status">
+                            <span class="btn btn-danger">$${glass.price}</span>
+                            <span>Stocking</span><br />
+                          </div>
+                          <p>
+                            ${glass.description}
+                          </p>
+              `;
   document.querySelector("#avatar").innerHTML = `
-<img src="${glass.virtualImg}" alt="vitural-img">
-`;
+  <img src="${glass.virtualImg}" alt="vitural-img">
+  `;
   document.querySelector(".vglasses__info").style.display = "block";
 };
-
-renderProducts(dataGlasses);
-
 window.removeGlasses = (value) => {
   if (value == false) {
     document.querySelector("#avatar img").style.opacity = 0;
@@ -142,3 +170,4 @@ window.removeGlasses = (value) => {
     document.querySelector("#avatar img").style.opacity = 0.9;
   }
 };
+glassList.renderProduct("#vglassesList");
